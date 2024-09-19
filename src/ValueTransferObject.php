@@ -44,23 +44,29 @@ class ValueTransferObject
         foreach ($arr as $field => $value) {
             $prop = $reflect->getProperty($field);
 
-            $matches = [
-                'bool' => (bool)$value,
-                '?bool' => (bool)$value,
-                'int' => (int)$value,
-                '?int' => (int)$value,
-                'float' => (float)$value,
-                '?float' => (float)$value,
-                'string' => (string)$value,
-                '?string' => (string)$value,
-                'array' => (array)$value,
-                '?array' => (array)$value,
-            ];
-
-            if (!isset($matches[(string)$prop->getType()])) {
-                $fieldValue = $value;
-            } else {
-                $fieldValue = $matches[(string)$prop->getType()];
+            switch ((string)$prop->getType()) {
+                case 'bool':
+                case '?bool' :
+                    $fieldValue = (bool)$value;
+                    break;
+                case 'int' :
+                case '?int' :
+                    $fieldValue = (int)$value;
+                    break;
+                case 'float' :
+                case '?float' :
+                    $fieldValue = (float)$value;
+                    break;
+                case 'string' :
+                case '?string' :
+                    $fieldValue = (string)$value;
+                    break;
+                case 'array' :
+                case '?array' :
+                    $fieldValue = (array)$value;
+                    break;
+                default:
+                    $fieldValue = $value;
             }
 
             $className = str_replace('?', '', (string)$prop->getType());
