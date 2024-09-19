@@ -1,0 +1,22 @@
+{
+  "name": "appsinvest/vto",
+  "description": "Value Transfer Object",
+  "license": "GPLv3",
+  "authors": [
+    {
+      "name": "appsinvest",
+      "email": "appscenter@proton.me"
+    }
+  ],
+  "keywords": [
+    "VTO Wrapper"
+  ],
+  "require": {
+    "php": ">=7.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "SoftInvest\\VTO\\": "src"
+    }
+  }
+}
