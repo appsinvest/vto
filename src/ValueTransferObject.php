@@ -35,13 +35,15 @@ class ValueTransferObject
 
     /**
      * @param array<string, mixed> $arr
-     *
-     * @throws ReflectionException
      */
     public function hydrate(array $arr): void
     {
         $reflect = new ReflectionClass($this);
         foreach ($arr as $field => $value) {
+            if (!$reflect->hasProperty($field)) {
+                continue;
+            }
+
             $prop = $reflect->getProperty($field);
 
             switch ((string)$prop->getType()) {
